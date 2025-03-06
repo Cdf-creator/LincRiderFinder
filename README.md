@@ -12,3 +12,8 @@ A SwiftUI-based location and favorites management app that allows users to searc
 2. MapKit – For location search and map integration
 3. CoreData – For saving and managing favorite places
 4. Combine – For handling data updates efficiently
+
+## How to Run the App
+1. Clone the repository:
+```git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
