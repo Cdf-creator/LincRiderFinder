@@ -16,4 +16,5 @@ A SwiftUI-based location and favorites management app that allows users to searc
 ## How to Run the App
 1. Clone the repository:
 `git clone https://github.com/yourusername/your-repo.git`
+
 `cd your-repo`
