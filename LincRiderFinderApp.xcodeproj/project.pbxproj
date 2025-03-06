@@ -1,0 +1,700 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B1B863512D794FA400A5FA2B /* LincRiderFinderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631902D76AA2300921FFD /* LincRiderFinderAppTests.swift */; };
+		B1B8639B2D79A35000A5FA2B /* MockLocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B8639A2D79A35000A5FA2B /* MockLocationSearchService.swift */; };
+		B1D6317B2D76AA2200921FFD /* LincRiderFinderAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6317A2D76AA2200921FFD /* LincRiderFinderAppApp.swift */; };
+		B1D6317D2D76AA2200921FFD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6317C2D76AA2200921FFD /* ContentView.swift */; };
+		B1D6317F2D76AA2300921FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1D6317E2D76AA2300921FFD /* Assets.xcassets */; };
+		B1D631822D76AA2300921FFD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1D631812D76AA2300921FFD /* Preview Assets.xcassets */; };
+		B1D631842D76AA2300921FFD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631832D76AA2300921FFD /* Persistence.swift */; };
+		B1D631872D76AA2300921FFD /* LincRiderFinderApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B1D631852D76AA2300921FFD /* LincRiderFinderApp.xcdatamodeld */; };
+		B1D6319B2D76AA2300921FFD /* LincRiderFinderAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6319A2D76AA2300921FFD /* LincRiderFinderAppUITests.swift */; };
+		B1D6319D2D76AA2300921FFD /* LincRiderFinderAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6319C2D76AA2300921FFD /* LincRiderFinderAppUITestsLaunchTests.swift */; };
+		B1D631AF2D76AAEB00921FFD /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631AE2D76AAEB00921FFD /* LocationViewModel.swift */; };
+		B1D631B22D76AB2C00921FFD /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631B12D76AB2C00921FFD /* ErrorHandler.swift */; };
+		B1D631B32D76AB2C00921FFD /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631B12D76AB2C00921FFD /* ErrorHandler.swift */; };
+		B1D631B52D76AB5E00921FFD /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631B42D76AB5E00921FFD /* FavoritesViewModel.swift */; };
+		B1D631B82D76ABE100921FFD /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631B72D76ABE100921FFD /* SearchService.swift */; };
+		B1D631B92D76ABE100921FFD /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631B72D76ABE100921FFD /* SearchService.swift */; };
+		B1D631BE2D76AC5500921FFD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631BD2D76AC5500921FFD /* MapView.swift */; };
+		B1D631C42D76BA5100921FFD /* PlaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631C32D76BA5100921FFD /* PlaceDetailView.swift */; };
+		B1D631C82D7705A000921FFD /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631C72D7705A000921FFD /* Place.swift */; };
+		B1D631CA2D78B12500921FFD /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631C92D78B12500921FFD /* FavoritesView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B1D6318D2D76AA2300921FFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1D6316F2D76AA2200921FFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1D631762D76AA2200921FFD;
+			remoteInfo = LincRiderFinderApp;
+		};
+		B1D631972D76AA2300921FFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1D6316F2D76AA2200921FFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1D631762D76AA2200921FFD;
+			remoteInfo = LincRiderFinderApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B1B8639A2D79A35000A5FA2B /* MockLocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationSearchService.swift; sourceTree = "<group>"; };
+		B1D631772D76AA2200921FFD /* LincRiderFinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LincRiderFinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1D6317A2D76AA2200921FFD /* LincRiderFinderAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LincRiderFinderAppApp.swift; sourceTree = "<group>"; };
+		B1D6317C2D76AA2200921FFD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B1D6317E2D76AA2300921FFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B1D631812D76AA2300921FFD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B1D631832D76AA2300921FFD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		B1D631862D76AA2300921FFD /* LincRiderFinderApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LincRiderFinderApp.xcdatamodel; sourceTree = "<group>"; };
+		B1D6318C2D76AA2300921FFD /* LincRiderFinderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LincRiderFinderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1D631902D76AA2300921FFD /* LincRiderFinderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LincRiderFinderAppTests.swift; sourceTree = "<group>"; };
+		B1D631962D76AA2300921FFD /* LincRiderFinderAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LincRiderFinderAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1D6319A2D76AA2300921FFD /* LincRiderFinderAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LincRiderFinderAppUITests.swift; sourceTree = "<group>"; };
+		B1D6319C2D76AA2300921FFD /* LincRiderFinderAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LincRiderFinderAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B1D631AE2D76AAEB00921FFD /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		B1D631B12D76AB2C00921FFD /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		B1D631B42D76AB5E00921FFD /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		B1D631B72D76ABE100921FFD /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		B1D631BD2D76AC5500921FFD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		B1D631C32D76BA5100921FFD /* PlaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailView.swift; sourceTree = "<group>"; };
+		B1D631C62D77003A00921FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B1D631C72D7705A000921FFD /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		B1D631C92D78B12500921FFD /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B1D631742D76AA2200921FFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1D631892D76AA2300921FFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1D631932D76AA2300921FFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B1D6316E2D76AA2200921FFD = {
+			isa = PBXGroup;
+			children = (
+				B1D631792D76AA2200921FFD /* LincRiderFinderApp */,
+				B1D6318F2D76AA2300921FFD /* LincRiderFinderAppTests */,
+				B1D631992D76AA2300921FFD /* LincRiderFinderAppUITests */,
+				B1D631782D76AA2200921FFD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B1D631782D76AA2200921FFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631772D76AA2200921FFD /* LincRiderFinderApp.app */,
+				B1D6318C2D76AA2300921FFD /* LincRiderFinderAppTests.xctest */,
+				B1D631962D76AA2300921FFD /* LincRiderFinderAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B1D631792D76AA2200921FFD /* LincRiderFinderApp */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631C62D77003A00921FFD /* Info.plist */,
+				B1D631AD2D76AAB500921FFD /* Utilities */,
+				B1D631AC2D76AAA900921FFD /* Services */,
+				B1D631AB2D76AA9900921FFD /* Views */,
+				B1D631AA2D76AA8E00921FFD /* ViewModels */,
+				B1D631A92D76AA6500921FFD /* Models */,
+				B1D6317A2D76AA2200921FFD /* LincRiderFinderAppApp.swift */,
+				B1D6317C2D76AA2200921FFD /* ContentView.swift */,
+				B1D6317E2D76AA2300921FFD /* Assets.xcassets */,
+				B1D631832D76AA2300921FFD /* Persistence.swift */,
+				B1D631852D76AA2300921FFD /* LincRiderFinderApp.xcdatamodeld */,
+				B1D631802D76AA2300921FFD /* Preview Content */,
+			);
+			path = LincRiderFinderApp;
+			sourceTree = "<group>";
+		};
+		B1D631802D76AA2300921FFD /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631812D76AA2300921FFD /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B1D6318F2D76AA2300921FFD /* LincRiderFinderAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631902D76AA2300921FFD /* LincRiderFinderAppTests.swift */,
+				B1B8639A2D79A35000A5FA2B /* MockLocationSearchService.swift */,
+			);
+			path = LincRiderFinderAppTests;
+			sourceTree = "<group>";
+		};
+		B1D631992D76AA2300921FFD /* LincRiderFinderAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B1D6319A2D76AA2300921FFD /* LincRiderFinderAppUITests.swift */,
+				B1D6319C2D76AA2300921FFD /* LincRiderFinderAppUITestsLaunchTests.swift */,
+			);
+			path = LincRiderFinderAppUITests;
+			sourceTree = "<group>";
+		};
+		B1D631A92D76AA6500921FFD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631C72D7705A000921FFD /* Place.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B1D631AA2D76AA8E00921FFD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631AE2D76AAEB00921FFD /* LocationViewModel.swift */,
+				B1D631B42D76AB5E00921FFD /* FavoritesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B1D631AB2D76AA9900921FFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631BD2D76AC5500921FFD /* MapView.swift */,
+				B1D631C32D76BA5100921FFD /* PlaceDetailView.swift */,
+				B1D631C92D78B12500921FFD /* FavoritesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B1D631AC2D76AAA900921FFD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631B72D76ABE100921FFD /* SearchService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B1D631AD2D76AAB500921FFD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B1D631B12D76AB2C00921FFD /* ErrorHandler.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B1D631762D76AA2200921FFD /* LincRiderFinderApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1D631A02D76AA2300921FFD /* Build configuration list for PBXNativeTarget "LincRiderFinderApp" */;
+			buildPhases = (
+				B1D631732D76AA2200921FFD /* Sources */,
+				B1D631742D76AA2200921FFD /* Frameworks */,
+				B1D631752D76AA2200921FFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LincRiderFinderApp;
+			productName = LincRiderFinderApp;
+			productReference = B1D631772D76AA2200921FFD /* LincRiderFinderApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B1D6318B2D76AA2300921FFD /* LincRiderFinderAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1D631A32D76AA2300921FFD /* Build configuration list for PBXNativeTarget "LincRiderFinderAppTests" */;
+			buildPhases = (
+				B1D631882D76AA2300921FFD /* Sources */,
+				B1D631892D76AA2300921FFD /* Frameworks */,
+				B1D6318A2D76AA2300921FFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1D6318E2D76AA2300921FFD /* PBXTargetDependency */,
+			);
+			name = LincRiderFinderAppTests;
+			productName = LincRiderFinderAppTests;
+			productReference = B1D6318C2D76AA2300921FFD /* LincRiderFinderAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B1D631952D76AA2300921FFD /* LincRiderFinderAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1D631A62D76AA2300921FFD /* Build configuration list for PBXNativeTarget "LincRiderFinderAppUITests" */;
+			buildPhases = (
+				B1D631922D76AA2300921FFD /* Sources */,
+				B1D631932D76AA2300921FFD /* Frameworks */,
+				B1D631942D76AA2300921FFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1D631982D76AA2300921FFD /* PBXTargetDependency */,
+			);
+			name = LincRiderFinderAppUITests;
+			productName = LincRiderFinderAppUITests;
+			productReference = B1D631962D76AA2300921FFD /* LincRiderFinderAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B1D6316F2D76AA2200921FFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					B1D631762D76AA2200921FFD = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					B1D6318B2D76AA2300921FFD = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B1D631762D76AA2200921FFD;
+					};
+					B1D631952D76AA2300921FFD = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B1D631762D76AA2200921FFD;
+					};
+				};
+			};
+			buildConfigurationList = B1D631722D76AA2200921FFD /* Build configuration list for PBXProject "LincRiderFinderApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B1D6316E2D76AA2200921FFD;
+			productRefGroup = B1D631782D76AA2200921FFD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B1D631762D76AA2200921FFD /* LincRiderFinderApp */,
+				B1D6318B2D76AA2300921FFD /* LincRiderFinderAppTests */,
+				B1D631952D76AA2300921FFD /* LincRiderFinderAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B1D631752D76AA2200921FFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1D631822D76AA2300921FFD /* Preview Assets.xcassets in Resources */,
+				B1D6317F2D76AA2300921FFD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1D6318A2D76AA2300921FFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1D631942D76AA2300921FFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B1D631732D76AA2200921FFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1D631872D76AA2300921FFD /* LincRiderFinderApp.xcdatamodeld in Sources */,
+				B1D631C82D7705A000921FFD /* Place.swift in Sources */,
+				B1D631B52D76AB5E00921FFD /* FavoritesViewModel.swift in Sources */,
+				B1D631842D76AA2300921FFD /* Persistence.swift in Sources */,
+				B1D631CA2D78B12500921FFD /* FavoritesView.swift in Sources */,
+				B1D6317D2D76AA2200921FFD /* ContentView.swift in Sources */,
+				B1D631B22D76AB2C00921FFD /* ErrorHandler.swift in Sources */,
+				B1D631B82D76ABE100921FFD /* SearchService.swift in Sources */,
+				B1D631C42D76BA5100921FFD /* PlaceDetailView.swift in Sources */,
+				B1D631BE2D76AC5500921FFD /* MapView.swift in Sources */,
+				B1D631AF2D76AAEB00921FFD /* LocationViewModel.swift in Sources */,
+				B1D6317B2D76AA2200921FFD /* LincRiderFinderAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1D631882D76AA2300921FFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1B8639B2D79A35000A5FA2B /* MockLocationSearchService.swift in Sources */,
+				B1D631B32D76AB2C00921FFD /* ErrorHandler.swift in Sources */,
+				B1B863512D794FA400A5FA2B /* LincRiderFinderAppTests.swift in Sources */,
+				B1D631B92D76ABE100921FFD /* SearchService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1D631922D76AA2300921FFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1D6319B2D76AA2300921FFD /* LincRiderFinderAppUITests.swift in Sources */,
+				B1D6319D2D76AA2300921FFD /* LincRiderFinderAppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B1D6318E2D76AA2300921FFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1D631762D76AA2200921FFD /* LincRiderFinderApp */;
+			targetProxy = B1D6318D2D76AA2300921FFD /* PBXContainerItemProxy */;
+		};
+		B1D631982D76AA2300921FFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1D631762D76AA2200921FFD /* LincRiderFinderApp */;
+			targetProxy = B1D631972D76AA2300921FFD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B1D6319E2D76AA2300921FFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B1D6319F2D76AA2300921FFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B1D631A12D76AA2300921FFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LincRiderFinderApp/Preview Content\"";
+				DEVELOPMENT_TEAM = BPNYW84254;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LincRiderFinderApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location to show nearby places";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medihealth.LincRiderFinderApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B1D631A22D76AA2300921FFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LincRiderFinderApp/Preview Content\"";
+				DEVELOPMENT_TEAM = BPNYW84254;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LincRiderFinderApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location to show nearby places";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medihealth.LincRiderFinderApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B1D631A42D76AA2300921FFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPNYW84254;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medihealth.LincRiderFinderAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LincRiderFinderApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LincRiderFinderApp";
+			};
+			name = Debug;
+		};
+		B1D631A52D76AA2300921FFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPNYW84254;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medihealth.LincRiderFinderAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LincRiderFinderApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LincRiderFinderApp";
+			};
+			name = Release;
+		};
+		B1D631A72D76AA2300921FFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPNYW84254;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medihealth.LincRiderFinderAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LincRiderFinderApp;
+			};
+			name = Debug;
+		};
+		B1D631A82D76AA2300921FFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPNYW84254;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medihealth.LincRiderFinderAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LincRiderFinderApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B1D631722D76AA2200921FFD /* Build configuration list for PBXProject "LincRiderFinderApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1D6319E2D76AA2300921FFD /* Debug */,
+				B1D6319F2D76AA2300921FFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1D631A02D76AA2300921FFD /* Build configuration list for PBXNativeTarget "LincRiderFinderApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1D631A12D76AA2300921FFD /* Debug */,
+				B1D631A22D76AA2300921FFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1D631A32D76AA2300921FFD /* Build configuration list for PBXNativeTarget "LincRiderFinderAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1D631A42D76AA2300921FFD /* Debug */,
+				B1D631A52D76AA2300921FFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1D631A62D76AA2300921FFD /* Build configuration list for PBXNativeTarget "LincRiderFinderAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1D631A72D76AA2300921FFD /* Debug */,
+				B1D631A82D76AA2300921FFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B1D631852D76AA2300921FFD /* LincRiderFinderApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B1D631862D76AA2300921FFD /* LincRiderFinderApp.xcdatamodel */,
+			);
+			currentVersion = B1D631862D76AA2300921FFD /* LincRiderFinderApp.xcdatamodel */;
+			path = LincRiderFinderApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = B1D6316F2D76AA2200921FFD /* Project object */;
+}
