@@ -15,7 +15,7 @@ A SwiftUI-based location and favorites management app that allows users to searc
 
 ## How to Run the App
 1. Clone the repository:
-`git clone https://github.com/yourusername/your-repo.git`
+`git clone [https://github.com/yourusername/your-repo.git](https://github.com/Cdf-creator/LincRiderFinder.git)`
 `cd your-repo`
 
 2. Open the project in Xcode:
