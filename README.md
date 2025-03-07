@@ -28,3 +28,4 @@ ii. Open the `.xcodeproj` file
 5. On the Map, click on any nearby places you can see to view detailed information about the selected place
 6. On the Detailed screen, tap on the "Save to Favorites" button to add favorites
 7. Tap on the "View Favorites" on the home screen to view your favorites
+8. Use the `arrow.clockwise` button at the bottom-right corner to always center the map back to the user location after zooming the map

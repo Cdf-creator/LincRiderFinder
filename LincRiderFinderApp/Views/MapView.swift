@@ -33,7 +33,7 @@ struct MapView: View {
     @State private var showPlaceDetails = false // Controls detail view visibility
     
     var body: some View {
-        VStack(spacing: 10) { // 🔹 Adds spacing between elements
+        VStack(spacing: 10) { //Adds spacing between elements
             //Search Bar
             TextField("Search places", text: $searchText)
                 .padding()

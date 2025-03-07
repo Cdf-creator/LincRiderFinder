@@ -14,7 +14,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newPlace = FavoritePlace(context: viewContext) // ✅ Replace 'Item' with 'FavoritePlace'
+            let newPlace = FavoritePlace(context: viewContext)
             newPlace.name = "Sample Place"
             newPlace.address = "123 Sample Street"
             newPlace.latitude = 37.7749
@@ -32,7 +32,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "LincRiderFinderApp") // ✅ Ensure this matches your .xcdatamodeld file
+        container = NSPersistentContainer(name: "LincRiderFinderApp")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
