@@ -18,15 +18,15 @@ struct PlaceDetailView: View {
             Text(place.name)
                 .font(.largeTitle)
                 .bold()
-
+            
             Text("Address: \(place.address ?? "N/A")")
                 .font(.body)
             
             Text("Latitude: \(place.coordinate.latitude)")
             Text("Longitude: \(place.coordinate.longitude)")
-
+            
             Button(action: {
-               favoritesVM.toggleFavorite(place: place)
+                favoritesVM.toggleFavorite(place: place)
                 isFavorite.toggle()
             }) {
                 HStack {
@@ -38,7 +38,7 @@ struct PlaceDetailView: View {
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
             }
-
+            
             Button("Close") {
                 dismiss()
             }
@@ -47,8 +47,8 @@ struct PlaceDetailView: View {
         .padding()
         .onAppear {
             print("this place is here: \(place.name)")
-           if favoritesVM.isFavorite(place: place) {
-               isFavorite = true
+            if favoritesVM.isFavorite(place: place) {
+                isFavorite = true
             } else {
                 isFavorite = false
             }
@@ -59,10 +59,10 @@ struct PlaceDetailView: View {
 }
 
 /*#Preview {
-    let samplePlace = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)))
-        samplePlace.name = "Golden Gate Bridge"
-        
-        return PlaceDetailView(place: samplePlace)
-    //PlaceDetailView()
-    //PlaceDetailView(place: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))))
-}*/
+ let samplePlace = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)))
+ samplePlace.name = "Golden Gate Bridge"
+ 
+ return PlaceDetailView(place: samplePlace)
+ //PlaceDetailView()
+ //PlaceDetailView(place: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))))
+ }*/

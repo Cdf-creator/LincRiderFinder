@@ -15,14 +15,14 @@ struct Place: Identifiable, Equatable {
     let coordinate: CLLocationCoordinate2D
     let address: String? //Add address property
     let category: String? //Added category property
-
+    
     init(mapItem: MKMapItem) {
         self.name = mapItem.name ?? "Unknown"
         self.coordinate = mapItem.placemark.coordinate
         self.address = mapItem.placemark.title //Extract address
         self.category = mapItem.pointOfInterestCategory?.rawValue //Extract category
     }
-
+    
     //Implement Equatable
     static func == (lhs: Place, rhs: Place) -> Bool {
         return lhs.id == rhs.id

@@ -7,14 +7,13 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 extension CLLocationCoordinate2D: Equatable {
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
 }
-
-import CoreLocation
 
 struct EquatableCoordinate: Equatable {
     let coordinate: CLLocationCoordinate2D
@@ -25,112 +24,128 @@ struct EquatableCoordinate: Equatable {
     }
 }
 
-import SwiftUI
-import MapKit
-
 struct MapView: View {
-    @StateObject var locationVM = LocationViewModel()
-    @State private var hasUpdatedRegion = false  //Prevents unnecessary auto-zooming
-    
-    @State private var cameraPosition: MapCameraPosition = .automatic //Use MapCameraPosition for iOS 17+
-    
+    @EnvironmentObject var locationVM: LocationViewModel
+    @State private var userRegion: MKCoordinateRegion?
+    @State private var lastSearchedLocation: CLLocation?
+    @State private var searchText = "" // State for search input
     @State var selectedPlace: Place? //Store selected place
     @State private var showPlaceDetails = false // Controls detail view visibility
-    @State private var searchText = "" //Store search input
-    @EnvironmentObject var favoritesVM: FavoritesViewModel  // Access the injected favoritesVM here
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) { // 🔹 Adds spacing between elements
             //Search Bar
             TextField("Search places", text: $searchText)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
-                .padding()
+                .padding(.horizontal)
                 .onChange(of: searchText) { _, newValue in
-                    locationVM.searchForPlaces(query: newValue) // Trigger search
+                    if newValue.isEmpty {
+                        // If searchText is empty, show nearby places around the user's location
+                        if let userCoordinate = locationVM.userLocation {
+                            locationVM.searchForHotels(near: userCoordinate)
+                        }
+                    } else {
+                        // Perform a search using the search text
+                        locationVM.searchForPlaces(query: newValue)
+                    }
                 }
-            
-            //Display User Location Details
-            VStack(alignment: .leading) {
-                Text("Latitude: \(locationVM.userLocation?.latitude ?? 0.0)")
-                Text("Longitude: \(locationVM.userLocation?.longitude ?? 0.0)")
+            // Display User Location Details
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Latitude: \(String(format: "%.3f", locationVM.userLocation?.latitude ?? 0.0))")
+                Text("Longitude: \(String(format: "%.3f", locationVM.userLocation?.longitude ?? 0.0))")
                 Text("Approx. Address: \(locationVM.userAddress)")
                 Text(locationVM.userAltitude)
             }
             .padding()
-            .background(Color.white.opacity(0.8))
+            .background(Color.white.opacity(0.9))
             .cornerRadius(10)
             .padding(.horizontal)
-            //Map Display
-            Map(coordinateRegion: $locationVM.region, showsUserLocation: true, annotationItems: locationVM.nearbyPlaces) { place in
-                MapAnnotation(coordinate: place.coordinate) {
-                    VStack {
-                        Image(systemName: "mappin.circle.fill")
-                            .foregroundColor(.red)
-                            .font(.title)
-                        
-                        Text(place.name)
-                            .font(.caption)
-                            .bold()
-                            .background(Color.white)
-                            .cornerRadius(5)
-                    }
-                    .contentShape(Rectangle()) //Ensures tappable area
-                    .onTapGesture { //Tap to select place
-                        DispatchQueue.main.async {
-                            selectedPlace = place
-                            locationVM.selectedPlace = place
-                            if selectedPlace != nil {
-                                showPlaceDetails = true
+            .shadow(radius: 3)
+            
+            //Map View with Reset Button
+            ZStack(alignment: .bottomTrailing) {
+                Map(coordinateRegion: Binding(
+                    get: { userRegion ?? locationVM.region },
+                    set: { userRegion = $0 }
+                ), showsUserLocation: true, annotationItems: locationVM.nearbyPlaces) { place in
+                    MapAnnotation(coordinate: place.coordinate) {
+                        VStack {
+                            Image(systemName: "mappin.circle.fill")
+                                .foregroundColor(.red)
+                                .font(.title)
+                            Text(place.name)
+                                .font(.caption)
+                                .bold()
+                                .padding(5)
+                                .background(Color.white.opacity(0.8))
+                                .cornerRadius(5)
+                        }
+                        .contentShape(Rectangle()) //Ensures tappable area
+                        .onTapGesture { //Tap to select place
+                            DispatchQueue.main.async {
+                                selectedPlace = place
+                                locationVM.selectedPlace = place
+                                if selectedPlace != nil {
+                                    showPlaceDetails = true
+                                }
+                                //showPlaceDetails = true
+                                print("here is tapped tapped: place: \(place),  selectedPlace: \(selectedPlace)")
                             }
-                            //showPlaceDetails = true
-                            print("here is tapped tapped: place: \(place),  selectedPlace: \(selectedPlace)")
                         }
                     }
+                }
+                .ignoresSafeArea()
+                .onAppear {
+                    if userRegion == nil {
+                        userRegion = locationVM.region // Set initial region once
+                    }
+                }
+                .onChange(of: locationVM.userLocation) { newCoordinate in
+                    guard let newCoordinate = newCoordinate else { return }
+                    let newLocation = CLLocation(latitude: newCoordinate.latitude, longitude: newCoordinate.longitude)
                     
-                }
-            }
-            // .edgesIgnoringSafeArea(.all)
-            .onChange(of: locationVM.userLocation) { oldLocation, newLocation in
-                if let newLocation = newLocation {
-                    if !hasUpdatedRegion || oldLocation == nil || locationVM.distanceBetween(oldLocation, newLocation) > 50 { //Update only if moved significantly
-                        withAnimation {
-                            locationVM.region = MKCoordinateRegion(
-                                center: newLocation,
-                                span: MKCoordinateSpan(latitudeDelta: 0.0001, longitudeDelta: 0.0001) //More reasonable zoom level
-                            )
+                    if searchText.isEmpty { // Only update nearby places if searchText is empty
+                        if lastSearchedLocation == nil || lastSearchedLocation?.distance(from: newLocation) ?? 0 > 50 {
+                            lastSearchedLocation = newLocation
+                            locationVM.searchForHotels(near: newCoordinate)
                         }
-                        hasUpdatedRegion = true
                     }
                 }
-            }
-            .onChange(of: locationVM.nearbyPlaces) {
-                locationVM.updateRegionForPlaces()
-            }
-            .onAppear{
-                print(locationVM.nearbyPlaces)
+                
+                //Reset Zoom Button
+                Button(action: {
+                    withAnimation {
+                        userRegion = locationVM.region // Restore original zoom level
+                    }
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                        .padding()
+                        .background(Color.white)
+                        .clipShape(Circle())
+                        .shadow(radius: 5)
+                }
+                .padding()
             }
             
-            Spacer()
+            Spacer() //Ensures the map takes up remaining space
         }
         .sheet(isPresented: $showPlaceDetails) {
             if let place = selectedPlace {
                 PlaceDetailView(place: place)
-                    .environmentObject(favoritesVM)  // Pass favoritesVM here
             } else {
                 if let place = locationVM.selectedPlace {
                     Text(place.name)
                 }
             }
         }
-        .onAppear {
-            locationVM.requestLocation()
-        }
     }
-    
 }
+
+
 
 #Preview {
     MapView()
+        .environmentObject(LocationViewModel())
 }
