@@ -31,6 +31,7 @@ struct MapView: View {
     @State private var searchText = "" // State for search input
     @State var selectedPlace: Place? //Store selected place
     @State private var showPlaceDetails = false // Controls detail view visibility
+    @State private var hasTriggeredInitialSearch = false
     
     var body: some View {
         VStack(spacing: 10) { //Adds spacing between elements
@@ -41,12 +42,15 @@ struct MapView: View {
                 .cornerRadius(8)
                 .padding(.horizontal)
                 .onChange(of: searchText) { _, newValue in
+                    print("the first onChanged() is called")
                     if newValue.isEmpty {
+                        print("newValue is empty: \(newValue)")
                         // If searchText is empty, show nearby places around the user's location
                         if let userCoordinate = locationVM.userLocation {
                             locationVM.searchForHotels(near: userCoordinate)
                         }
                     } else {
+                        print("newValue is not empty: \(newValue)")
                         // Perform a search using the search text
                         locationVM.searchForPlaces(query: newValue)
                     }
@@ -100,14 +104,25 @@ struct MapView: View {
                 .onAppear {
                     if userRegion == nil {
                         userRegion = locationVM.region // Set initial region once
+                    } else {
+                        print("userRegion is not nil")
+                        if let userLocation = locationVM.userLocation, !hasTriggeredInitialSearch {
+                            print("Running initial hotel search when MapView appears...")
+                            locationVM.searchForHotels(near: userLocation)
+                            hasTriggeredInitialSearch = true
+                        }
                     }
+                    
                 }
                 .onChange(of: locationVM.userLocation) { newCoordinate in
+                    print("this second onChnage() is called")
                     guard let newCoordinate = newCoordinate else { return }
                     let newLocation = CLLocation(latitude: newCoordinate.latitude, longitude: newCoordinate.longitude)
                     
                     if searchText.isEmpty { // Only update nearby places if searchText is empty
+                        print("searchText is empty: \(searchText)")
                         if lastSearchedLocation == nil || lastSearchedLocation?.distance(from: newLocation) ?? 0 > 50 {
+                            print("the condition after searchText is passed")
                             lastSearchedLocation = newLocation
                             locationVM.searchForHotels(near: newCoordinate)
                         }

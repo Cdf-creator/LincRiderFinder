@@ -41,6 +41,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 center: location.coordinate,
                 span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             )
+            print("this is the userLoaction: \(self.userLocation)")
             // self.checkAndSearchForHotels(newLocation: location)
             DispatchQueue.main.async {
                 self.fetchAddress(from: location)
