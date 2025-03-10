@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		B1B863512D794FA400A5FA2B /* LincRiderFinderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D631902D76AA2300921FFD /* LincRiderFinderAppTests.swift */; };
 		B1B8639B2D79A35000A5FA2B /* MockLocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B8639A2D79A35000A5FA2B /* MockLocationSearchService.swift */; };
+		B1C405E12D7C7AB6003868D5 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C405E02D7C7AB6003868D5 /* MockLocationManager.swift */; };
+		B1C405E32D7EF0CD003868D5 /* LocationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C405E22D7EF0CD003868D5 /* LocationSearchService.swift */; };
+		B1C405E52D7F01D7003868D5 /* MKLocalSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C405E42D7F01D7003868D5 /* MKLocalSearchService.swift */; };
 		B1D6317B2D76AA2200921FFD /* LincRiderFinderAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6317A2D76AA2200921FFD /* LincRiderFinderAppApp.swift */; };
 		B1D6317D2D76AA2200921FFD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D6317C2D76AA2200921FFD /* ContentView.swift */; };
 		B1D6317F2D76AA2300921FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1D6317E2D76AA2300921FFD /* Assets.xcassets */; };
@@ -48,6 +51,9 @@
 
 /* Begin PBXFileReference section */
 		B1B8639A2D79A35000A5FA2B /* MockLocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationSearchService.swift; sourceTree = "<group>"; };
+		B1C405E02D7C7AB6003868D5 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
+		B1C405E22D7EF0CD003868D5 /* LocationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchService.swift; sourceTree = "<group>"; };
+		B1C405E42D7F01D7003868D5 /* MKLocalSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKLocalSearchService.swift; sourceTree = "<group>"; };
 		B1D631772D76AA2200921FFD /* LincRiderFinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LincRiderFinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D6317A2D76AA2200921FFD /* LincRiderFinderAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LincRiderFinderAppApp.swift; sourceTree = "<group>"; };
 		B1D6317C2D76AA2200921FFD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -148,6 +154,7 @@
 			children = (
 				B1D631902D76AA2300921FFD /* LincRiderFinderAppTests.swift */,
 				B1B8639A2D79A35000A5FA2B /* MockLocationSearchService.swift */,
+				B1C405E02D7C7AB6003868D5 /* MockLocationManager.swift */,
 			);
 			path = LincRiderFinderAppTests;
 			sourceTree = "<group>";
@@ -192,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				B1D631B72D76ABE100921FFD /* SearchService.swift */,
+				B1C405E22D7EF0CD003868D5 /* LocationSearchService.swift */,
+				B1C405E42D7F01D7003868D5 /* MKLocalSearchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -337,10 +346,12 @@
 				B1D631872D76AA2300921FFD /* LincRiderFinderApp.xcdatamodeld in Sources */,
 				B1D631C82D7705A000921FFD /* Place.swift in Sources */,
 				B1D631B52D76AB5E00921FFD /* FavoritesViewModel.swift in Sources */,
+				B1C405E52D7F01D7003868D5 /* MKLocalSearchService.swift in Sources */,
 				B1D631842D76AA2300921FFD /* Persistence.swift in Sources */,
 				B1D631CA2D78B12500921FFD /* FavoritesView.swift in Sources */,
 				B1D6317D2D76AA2200921FFD /* ContentView.swift in Sources */,
 				B1D631B22D76AB2C00921FFD /* ErrorHandler.swift in Sources */,
+				B1C405E32D7EF0CD003868D5 /* LocationSearchService.swift in Sources */,
 				B1D631B82D76ABE100921FFD /* SearchService.swift in Sources */,
 				B1D631C42D76BA5100921FFD /* PlaceDetailView.swift in Sources */,
 				B1D631BE2D76AC5500921FFD /* MapView.swift in Sources */,
@@ -353,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C405E12D7C7AB6003868D5 /* MockLocationManager.swift in Sources */,
 				B1B8639B2D79A35000A5FA2B /* MockLocationSearchService.swift in Sources */,
 				B1D631B32D76AB2C00921FFD /* ErrorHandler.swift in Sources */,
 				B1B863512D794FA400A5FA2B /* LincRiderFinderAppTests.swift in Sources */,

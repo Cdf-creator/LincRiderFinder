@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct LincRiderFinderAppApp: App {
-    @StateObject var locationVM = LocationViewModel()
+    @StateObject var locationVM = LocationViewModel(searchService: MKLocalSearchService())
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

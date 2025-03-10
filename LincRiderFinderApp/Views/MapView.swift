@@ -162,5 +162,5 @@ struct MapView: View {
 
 #Preview {
     MapView()
-        .environmentObject(LocationViewModel())
+        .environmentObject(LocationViewModel(searchService: MKLocalSearchService()))
 }

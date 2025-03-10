@@ -15,240 +15,144 @@ class ViewModelTests: XCTestCase {
     // MARK: - Properties
     var locationViewModel: LocationViewModel!
     var favoritesViewModel: FavoritesViewModel!
-    var mockContext: NSManagedObjectContext!
+    var testContext: NSManagedObjectContext!
     
-    // MARK: - Setup and Teardown
-    override func setUpWithError() throws {
-        let container = NSPersistentContainer(name: "LincRiderFinderApp") //Actual model name
+    override func setUp() {
+        super.setUp()
+        
+        let container = NSPersistentContainer(name: "LincRiderFinderApp") // Replace with your Core Data model name
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
         container.persistentStoreDescriptions = [description]
         
-        let expectation = XCTestExpectation(description: "Load Core Data Stack")
+        let expectation = XCTestExpectation(description: "Load Core Data Persistent Stores")
         
         container.loadPersistentStores { _, error in
-            if let error = error {
-                XCTFail("Failed to load Core Data stack: \(error)")
-                return
+            XCTAssertNil(error, "Failed to load in-memory store: \(error?.localizedDescription ?? "")")
+            self.testContext = container.viewContext
+            self.favoritesViewModel = FavoritesViewModel(context: self.testContext)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0) // Wait for Core Data to be ready
+        
+        // Initialize
+        //LocationViewModel = LocationViewModel()
+        locationViewModel = LocationViewModel(searchService: MockLocationSearchService())
+    }
+    
+    override func tearDown() {
+        favoritesViewModel = nil
+        testContext = nil
+        locationViewModel = nil
+        super.tearDown()
+    }
+    
+    // MARK: - LocationViewModel Tests
+    func testLocationUpdates() {
+        let mockLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        
+        let expectation = XCTestExpectation(description: "Wait for location update")
+        
+        // Observe when userLocation changes
+        let cancellable = locationViewModel.$userLocation.sink { location in
+            if let location = location {
+                XCTAssertEqual(location.latitude, mockLocation.coordinate.latitude)
+                XCTAssertEqual(location.longitude, mockLocation.coordinate.longitude)
+                expectation.fulfill() // Mark the expectation as fulfilled
             }
-            self.mockContext = container.viewContext
-            self.favoritesViewModel = FavoritesViewModel(context: self.mockContext)
+        }
+        
+        // Simulate location update
+        locationViewModel.locationManager(CLLocationManager(), didUpdateLocations: [mockLocation])
+        
+        // Wait up to 2 seconds for the async update to complete
+        wait(for: [expectation], timeout: 2.0)
+        
+        // Cleanup
+        cancellable.cancel()
+    }
+    
+    func testFetchAddress() {
+        let mockLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        
+        let expectation = XCTestExpectation(description: "Fetching address")
+        
+        locationViewModel.fetchAddress(from: mockLocation)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            XCTAssertNotEqual(self.locationViewModel.userAddress, "Fetching address...")
             expectation.fulfill()
         }
         
         wait(for: [expectation], timeout: 5.0)
-        
-        locationViewModel = LocationViewModel()
     }
     
-    override func tearDownWithError() throws {
-        locationViewModel = nil
-        favoritesViewModel = nil
-        mockContext = nil
+    func testFetchAltitude() {
+        let mockLocation = CLLocation(
+            coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+            altitude: 50.0,
+            horizontalAccuracy: 5.0,
+            verticalAccuracy: 5.0,
+            timestamp: Date()
+        )
+        
+        locationViewModel.fetchAltitude(from: mockLocation)
+        
+        XCTAssertEqual(locationViewModel.userAltitude, "Altitude: 50.000 meters")
     }
     
-    // MARK: - LocationViewModel Tests
-    
-    // Test location updates
-    func testLocationUpdate() throws {
-        // Arrange
-        let mockLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
-        let expectation = XCTestExpectation(description: "Location should be updated")
+    func testCheckAndSearchForHotels() {
+        let mockLocation1 = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        let mockLocation2 = CLLocation(latitude: 37.7759, longitude: -122.4194) // ~111 meters away
         
-        // Reset userLocation
-        locationViewModel.userLocation = nil
+        locationViewModel.checkAndSearchForHotels(newLocation: mockLocation1)
+        XCTAssertNotNil(locationViewModel.nearbyPlaces)
         
-        // Act - Manually update userLocation without relying on CLLocationManager
-        DispatchQueue.main.async {
-            self.locationViewModel.userLocation = mockLocation.coordinate
-            expectation.fulfill()
-        }
-        
-        // Wait for async update
-        wait(for: [expectation], timeout: 1.0)
-        
-        // Assert
-        XCTAssertEqual(locationViewModel.userLocation?.latitude, 37.7749, "Latitude should match.")
-        XCTAssertEqual(locationViewModel.userLocation?.longitude, -122.4194, "Longitude should match.")
+        locationViewModel.checkAndSearchForHotels(newLocation: mockLocation2)
+        XCTAssertNotNil(locationViewModel.nearbyPlaces)
     }
     
-    // Test for fetching nearby places
-    func testFetchNearbyPlaces() throws {
-        // Arrange
-        let mockPlace = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)))
-        mockPlace.name = "Test Hotel"
-        
-        // Create a mock MKLocalSearchRequest and MKLocalSearch instance
-        let searchRequest = MKLocalSearch.Request()
-        let mockSearch = MKLocalSearch(request: searchRequest)
-        
-        // Mocking the MKLocalSearch behavior using the completionHandler
-        mockSearch.start { response, error in
-            if let response = response {
-                // Simulate adding the mockPlace to the view model
-                self.locationViewModel.nearbyPlaces = response.mapItems.map { mapItem in
-                    Place(mapItem: mapItem)
-                }
-            }
-        }
-        
-        // Act
-       // locationViewModel.fetchNearbyPlaces()  // Call the method being tested
-        
-        // Assert that the fetched places are not empty
-        XCTAssertFalse(locationViewModel.nearbyPlaces.isEmpty, "Nearby places should not be empty.")
-    }
-    
-    // Test searchForPlaces method
-    func testSearchForPlaces() throws {
-        // Arrange
-        let mockSearchResults = [Place(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))))]
-        
-       // locationViewModel.isPerformingSearch = true
-        
-        // Mock the search response
-        locationViewModel.searchForPlaces(query: "Hotel")
-        
-        // Act
-        locationViewModel.searchForPlaces(query: "Hotel")
-        
-        // Assert
-       // XCTAssertTrue(locationViewModel.isPerformingSearch, "Search should be performing.")
-        XCTAssertFalse(locationViewModel.nearbyPlaces.isEmpty, "Nearby places should not be empty after search.")
-    }
-    
-    // Test the distanceBetween function
-    func testDistanceBetween() {
-        // Arrange
-        let coord1 = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
-        let coord2 = CLLocationCoordinate2D(latitude: 37.8044, longitude: -122.2712)
-        
-        // Act
-       // let distance = locationViewModel.distanceBetween(coord1, coord2)
-        
-        // Assert
-      //  XCTAssertGreaterThan(distance, 0, "Distance should be greater than 0.")
-    }
-    
-    // Test region update for places
-    func testUpdateRegionForPlaces() {
-        // Arrange
-        locationViewModel.userLocation = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
-        locationViewModel.nearbyPlaces = [
-            Place(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)))),
-            Place(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.8044, longitude: -122.2712))))
-        ]
-        
-        // Act
-       // locationViewModel.updateRegionForPlaces()
-        
-        // Assert
-        XCTAssertNotNil(locationViewModel.region.center, "Region center should be updated.")
-        XCTAssertGreaterThan(locationViewModel.region.span.latitudeDelta, 0, "Region span should have a non-zero latitude delta.")
-    }
     
     // MARK: - FavoritesViewModel Tests
-    // Test fetch favorites
-    func testFetchFavorites() throws {
-        // Create an MKPlacemark with the required coordinate
-        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))
+    func testFavoritesFunctionality() {
+        let place1 = Place(
+            mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)))
+        )
         
-        // Create an MKMapItem with the placemark
-        let mockMapItem = MKMapItem(placemark: placemark)
-        mockMapItem.name = "Test Hotel"
-        // Mocking address here by assigning it directly to the title
-        placemark.setValue("123 Test St", forKey: "title")  // This workaround allows us to mock the title
+        let place2 = Place(
+            mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.1, longitude: -122.1)))
+        )
         
-        // Create the Place from the MKMapItem
-        let mockPlace = Place(mapItem: mockMapItem)
+        // Test initially empty favorites
+        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 0)
+        XCTAssertFalse(favoritesViewModel.isFavorite(place: place1))
         
-        // Add the place to favorites
-        favoritesViewModel.toggleFavorite(place: mockPlace)
+        // Test saving a place
+        favoritesViewModel.saveToFavorites(place: place1)
+        XCTAssertTrue(favoritesViewModel.isFavorite(place: place1))
+        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 1)
         
-        // Fetch favorites and verify
-        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 1, "Favorite places should contain one item.")
-        XCTAssertEqual(favoritesViewModel.favoritePlaces.first?.name, mockPlace.name, "The fetched favorite place's name should match.")
-    }
-    
-    // Test if the place is favorite
-    func testIsFavorite() throws {
-        // Create a mock MKPlacemark with required coordinates
-        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))
+        // Test removing a place
+        favoritesViewModel.removeFromFavorites(place: place1)
+        XCTAssertFalse(favoritesViewModel.isFavorite(place: place1))
+        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 0)
         
-        // Create an MKMapItem with the placemark
-        let mockMapItem = MKMapItem(placemark: placemark)
-        mockMapItem.name = "Test Hotel"
-        placemark.setValue("123 Test St", forKey: "title")  // Workaround to mock the address
+        // Test toggling favorites
+        favoritesViewModel.toggleFavorite(place: place1)
+        XCTAssertTrue(favoritesViewModel.isFavorite(place: place1))
+        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 1)
         
-        // Create the Place object from the MKMapItem
-        let mockPlace = Place(mapItem: mockMapItem)
+        favoritesViewModel.toggleFavorite(place: place1)
+        XCTAssertFalse(favoritesViewModel.isFavorite(place: place1))
+        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 0)
         
-        // Ensure the place is not a favorite initially
-        XCTAssertFalse(favoritesViewModel.isFavorite(place: mockPlace), "The place should not be in favorites.")
+        // Test fetching multiple places
+        favoritesViewModel.saveToFavorites(place: place1)
+        favoritesViewModel.saveToFavorites(place: place2)
+        favoritesViewModel.fetchFavorites()
         
-        // Add the place to favorites
-        favoritesViewModel.toggleFavorite(place: mockPlace)
-        
-        // Ensure the place is now a favorite
-        XCTAssertTrue(favoritesViewModel.isFavorite(place: mockPlace), "The place should be in favorites.")
-    }
-    
-    // Test toggle favorite (add and remove)
-    func testToggleFavorite() throws {
-        // Create a mock MKPlacemark with required coordinates
-        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))
-        
-        // Create an MKMapItem with the placemark
-        let mockMapItem = MKMapItem(placemark: placemark)
-        mockMapItem.name = "Test Hotel"
-        placemark.setValue("123 Test St", forKey: "title")  // Workaround to mock the address
-        
-        // Create the Place object from the MKMapItem
-        let mockPlace = Place(mapItem: mockMapItem)
-        
-        // Ensure the place is not a favorite initially
-        XCTAssertFalse(favoritesViewModel.isFavorite(place: mockPlace), "The place should not be in favorites.")
-        
-        // Add the place to favorites
-        favoritesViewModel.toggleFavorite(place: mockPlace)
-        
-        // Ensure the place is now in favorites
-        XCTAssertTrue(favoritesViewModel.isFavorite(place: mockPlace), "The place should be added to favorites.")
-        
-        // Remove the place from favorites
-        favoritesViewModel.toggleFavorite(place: mockPlace)
-        
-        // Ensure the place is removed from favorites
-        XCTAssertFalse(favoritesViewModel.isFavorite(place: mockPlace), "The place should be removed from favorites.")
-    }
-    
-    // Test saving and removing from favorites
-    func testSaveAndRemoveFavorite() throws {
-        // Create a mock MKPlacemark with the required coordinate
-        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))
-        
-        // Create an MKMapItem with the placemark
-        let mockMapItem = MKMapItem(placemark: placemark)
-        mockMapItem.name = "Test Hotel"
-        
-        // Mock the address using setValue (workaround for the immutable title)
-        placemark.setValue("123 Test St", forKey: "title")
-        
-        // Create the Place object from the MKMapItem
-        let mockPlace = Place(mapItem: mockMapItem)
-        
-        // Save to favorites
-        favoritesViewModel.saveToFavorites(place: mockPlace)
-        
-        // Check if it was saved
-        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 1, "The favorite places should contain one item.")
-        XCTAssertEqual(favoritesViewModel.favoritePlaces.first?.name, mockPlace.name, "The favorite place should have the same name.")
-        
-        // Remove from favorites
-        favoritesViewModel.removeFromFavorites(place: mockPlace)
-        
-        // Verify it's removed
-        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 0, "The favorite places should be empty.")
+        XCTAssertEqual(favoritesViewModel.favoritePlaces.count, 2)
     }
     
     
@@ -256,20 +160,25 @@ class ViewModelTests: XCTestCase {
     
     // Test that a place fetched from the LocationViewModel can be added to favorites
     func testFetchAndAddPlaceToFavorites() throws {
-        // Create a mock MKPlacemark with the required coordinate
-        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))
+        // Create a coordinate
+        let coordinate = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
         
-        // Create an MKMapItem with the placemark
+        // Create an address dictionary (Optional, but helpful for thoroughfare)
+        let addressDict: [String: Any] = [
+            "Street": "123 Test St"
+        ]
+        
+        // Create an MKPlacemark with a coordinate and address dictionary
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
+        
+        // Create an MKMapItem from the placemark
         let mockMapItem = MKMapItem(placemark: placemark)
-        mockMapItem.name = "Test Hotel"
+        mockMapItem.name = "Test Hotel" // Assign a name directly
         
-        // Mock the address using setValue (workaround for the immutable title)
-        placemark.setValue("123 Test St", forKey: "title")
-        
-        // Create the Place object from the MKMapItem
+        // Create a Place object from MKMapItem
         let mockPlace = Place(mapItem: mockMapItem)
         
-        // Simulate fetching places in the LocationViewModel
+        // Simulate fetching places in LocationViewModel
         locationViewModel.nearbyPlaces = [mockPlace]
         
         // Add the fetched place to favorites

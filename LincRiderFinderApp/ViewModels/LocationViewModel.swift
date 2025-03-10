@@ -24,7 +24,10 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     @Published private var lastSearchedLocation: CLLocation? = nil
     
-    override init() {
+    private let searchService: LocationSearchService  // Injected dependency
+    
+     init(searchService: LocationSearchService) {
+        self.searchService = searchService
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -69,7 +72,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    private func fetchAddress(from location: CLLocation) {
+    func fetchAddress(from location: CLLocation) {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             guard let placemark = placemarks?.first, error == nil else {
@@ -85,11 +88,12 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    private func fetchAltitude(from location: CLLocation) {
+    func fetchAltitude(from location: CLLocation) {
         self.userAltitude = "Altitude: \(String(format: "%.3f", location.altitude)) meters"
     }
     
-    func searchForHotels(near coordinate: CLLocationCoordinate2D) {
+    //Without Using the LocalSearchService Dependency Injection
+   /* func searchForHotels(near coordinate: CLLocationCoordinate2D) {
         print("searching is searching")
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "Hotel"
@@ -107,9 +111,24 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 print("this is the nearbyPlaces: \(self.nearbyPlaces)")
             }
         }
-    }
+    }*/
     
-    func searchForPlaces(query: String) {
+    //Using the LocalSearchService Dependency Injection
+    func searchForHotels(near coordinate: CLLocationCoordinate2D) {
+            let searchRegion = MKCoordinateRegion(
+                center: coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+            )
+
+            searchService.search(query: "Hotel", region: searchRegion) { places in
+                DispatchQueue.main.async {
+                    self.nearbyPlaces = places
+                }
+            }
+        }
+    
+    //Without Using the LocalSearchService Dependency Injection
+   /* func searchForPlaces(query: String) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.region = MKCoordinateRegion(
@@ -125,6 +144,20 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 self.nearbyPlaces = response.mapItems.map { Place(mapItem: $0) }
             }
         }
-    }
+    }*/
+    
+    //Using the LocalSearchService Dependency Injection
+    func searchForPlaces(query: String) {
+            let searchRegion = MKCoordinateRegion(
+                center: userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+            )
+
+            searchService.search(query: query, region: searchRegion) { places in
+                DispatchQueue.main.async {
+                    self.nearbyPlaces = places
+                }
+            }
+        }
     
 }
